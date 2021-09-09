@@ -9,7 +9,7 @@ public class Interpreter {
         ArrayList<String> parsedEq = new ArrayList<String>();
         String currentNum = "";
         while (source.length() > 0) {
-            if (isOperator(source.charAt(0)) || isParentheses(source.charAt(0)) || source.charAt(0) == '-') {
+            if (isOperator(Character.toString(source.charAt(0))) || isParentheses(Character.toString(source.charAt(0))) || source.charAt(0) == '-') {
                 if (source.charAt(0) == '-') {
                     if (!currentNum.equals("")) {
                         parsedEq.add(currentNum);
@@ -55,7 +55,7 @@ public class Interpreter {
         }
         int parenCount = 0;
         for (int i = 0; i < eq.size(); i++) {
-            if (isOperator(eq.get(i).charAt(0))) {
+            if (isOperator(eq.get(i))) {
                 if (eq.get(i).equals("!")) {
                     if (!legalNumber(eq.get(i - 1)) && !eq.get(i - 1).equals(")")) {
                         return false;
@@ -99,13 +99,13 @@ public class Interpreter {
         return (a >= 48 && a <= 57 || a == '.' || a == '-');
     }
 
-    private boolean isOperator(char a) {
+    private boolean isOperator(String a) {
         String operators = "+/*^!";
-        return (operators.contains(Character.toString(a)));
+        return (operators.contains(a));
     }
 
-    private boolean isParentheses(char a) {
-        return (a == '(' || a == ')');
+    private boolean isParentheses(String a) {
+        return (a.equals("(") || a.equals(")"));
     }
 
 }
