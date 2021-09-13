@@ -7,10 +7,10 @@ public class Solver {
 
     /**
      * Solves an equation which has been parsed by an Interpreter's parseEquation method
-     * @param eq parsed equation
-     * @param startIndex index of the equation to start at (inclusive)
-     * @param endIndex index of the equation to end at (exclusive)
-     * @return returns the result of the equation
+     * @param eq Parsed equation
+     * @param startIndex Index of the equation to start at (inclusive)
+     * @param endIndex Index of the equation to end at (exclusive)
+     * @return Returns the result of the equation
      * @throws DivideByZeroException
      */
     public String solve(ArrayList<String> eq, int startIndex, int endIndex) throws DivideByZeroException, IllegalFactorialException {

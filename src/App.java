@@ -4,6 +4,7 @@ import java.util.Scanner;
 import exceptions.DivideByZeroException;
 import exceptions.IllegalEquationException;
 import exceptions.IllegalFactorialException;
+import parsers.Interpreter;
 
 public class App {
 
