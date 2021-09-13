@@ -14,7 +14,7 @@ public class Interpreter {
      * @throws IllegalEquationException
      * @throws IllegalSymbolException
      */
-    public ArrayList<String> parseEquation(String source) throws IllegalEquationException, IllegalSymbolException {
+    public static ArrayList<String> parseEquation(String source) throws IllegalEquationException, IllegalSymbolException {
         source = source.replaceAll(" ", "").toLowerCase();
         ArrayList<String> parsedEq = new ArrayList<String>();
         String currentNum = "";
@@ -56,7 +56,7 @@ public class Interpreter {
         return parsedEq;
     }
 
-    private boolean isLegal(ArrayList<String> eq) {
+    private static boolean isLegal(ArrayList<String> eq) {
         if (!(eq.get(0).equals("(") || legalNumber(eq.get(0)))) {
             return false;
         }
@@ -92,7 +92,7 @@ public class Interpreter {
         return (parenCount == 0) ? true : false;
     }
 
-    private boolean legalNumber(String str) {
+    private static boolean legalNumber(String str) {
         byte numDot = 0, numInt = 0;
         for (int i = 0; i < str.length(); i++) {
             if (str.charAt(i) == '.') {
@@ -106,16 +106,16 @@ public class Interpreter {
         return (numDot <= 1 && numInt > 0);
     }
 
-    private boolean isNumber(char a) {
+    private static boolean isNumber(char a) {
         return (a >= 48 && a <= 57 || a == '.' || a == '-');
     }
 
-    private boolean isOperator(String a) {
+    private static boolean isOperator(String a) {
         String operators = "+/*^!";
         return (operators.contains(a));
     }
 
-    private boolean isParentheses(String a) {
+    private static boolean isParentheses(String a) {
         return (a.equals("(") || a.equals(")"));
     }
 

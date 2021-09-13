@@ -13,7 +13,7 @@ public class Solver {
      * @return Returns the result of the equation
      * @throws DivideByZeroException
      */
-    public String solve(ArrayList<String> eq, int startIndex, int endIndex) throws DivideByZeroException, IllegalFactorialException {
+    public static String solve(ArrayList<String> eq, int startIndex, int endIndex) throws DivideByZeroException, IllegalFactorialException {
         // parentheses
         for (int i = startIndex; i < endIndex; i++) {
             if (eq.get(i).equals("(")) {
@@ -91,11 +91,11 @@ public class Solver {
         return eq.get(startIndex);
     }
 
-    private String exponent(String a, String b) {
+    private static String exponent(String a, String b) {
         return Double.toString(Math.pow(Double.parseDouble(a), Double.parseDouble(b)));
     }
 
-    private String factorial(String a) throws IllegalFactorialException {
+    private static String factorial(String a) throws IllegalFactorialException {
         double da = Double.parseDouble(a);
         if (da % 1 != 0 || da < 0) {
             throw new IllegalFactorialException("Error: Illegal Factorial");
@@ -110,18 +110,18 @@ public class Solver {
         }
     }
 
-    private String multiply(String a, String b) {
+    private static String multiply(String a, String b) {
         return Double.toString(Double.parseDouble(a) * Double.parseDouble(b));
     }
 
-    private String divide(String a, String b) throws DivideByZeroException {
+    private static String divide(String a, String b) throws DivideByZeroException {
         if (Double.parseDouble(b) == 0) {
             throw new DivideByZeroException("Error: Divide By Zero");
         }
         return Double.toString(Double.parseDouble(a) / Double.parseDouble(b));
     }
 
-    private String add(String a, String b) {
+    private static String add(String a, String b) {
         return Double.toString(Double.parseDouble(a) + Double.parseDouble(b));
     }
 
