@@ -13,4 +13,14 @@ public class Checker {
         return true;
     }
 
+    /**
+     * Checks if a character is a legal character
+     * @param symbol Character to be checked
+     * @return Returns true if the symbol is allowed and false if the symbol isn't allowed
+     */
+    protected static boolean legalSymbol(char symbol) {
+        String legalSymbols = "0123456789!+-/*^()";
+        return legalSymbols.contains(Character.toString(symbol));
+    }
+
 }

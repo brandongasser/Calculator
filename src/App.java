@@ -4,6 +4,7 @@ import java.util.Scanner;
 import exceptions.DivideByZeroException;
 import exceptions.IllegalEquationException;
 import exceptions.IllegalFactorialException;
+import exceptions.IllegalSymbolException;
 import parsers.Interpreter;
 
 public class App {
@@ -26,6 +27,8 @@ public class App {
                     System.out.println(e.getMessage());
                 }
             } catch (IllegalEquationException e) {
+                System.out.println(e.getMessage());
+            } catch (IllegalSymbolException e) {
                 System.out.println(e.getMessage());
             }
             System.out.println();
