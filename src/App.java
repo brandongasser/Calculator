@@ -1,11 +1,9 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import exceptions.DivideByZeroException;
-import exceptions.IllegalEquationException;
-import exceptions.IllegalFactorialException;
-import exceptions.IllegalSymbolException;
-import parsers.Interpreter;
+import parser.Interpreter;
+import solver.Solver;
+import symbols.MathSymbol;
 
 public class App {
 
@@ -17,20 +15,8 @@ public class App {
                 System.out.println("Quitting");
                 break;
             }
-            try {
-                ArrayList<String> parsedEq = Interpreter.parseEquation(input);
-                try {
-                    System.out.println(Solver.solve(parsedEq, 0, parsedEq.size()));
-                } catch (DivideByZeroException e) {
-                    System.out.println(e.getMessage());
-                } catch (IllegalFactorialException e) {
-                    System.out.println(e.getMessage());
-                }
-            } catch (IllegalEquationException e) {
-                System.out.println(e.getMessage());
-            } catch (IllegalSymbolException e) {
-                System.out.println(e.getMessage());
-            }
+            ArrayList<MathSymbol> eqrpn = Interpreter.parseEquation(input);
+            System.out.println(Solver.solve(eqrpn).toString());
             System.out.println();
         }
         sc.close();
