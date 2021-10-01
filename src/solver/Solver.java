@@ -1,8 +1,10 @@
 package solver;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Stack;
 
+import exceptions.DivideByZeroException;
 import exceptions.IllegalEquationException;
 import symbols.MathSymbol;
 
@@ -13,8 +15,9 @@ public class Solver {
      * @param eq Parsed equation
      * @return Returns the result of the equation
      * @throws IllegalEquationException
+     * @throws DivideByZeroException
      */
-    public static BigDecimal solve(ArrayList<MathSymbol> eqrpn) throws IllegalEquationException {
+    public static BigDecimal solve(ArrayList<MathSymbol> eqrpn) throws IllegalEquationException, DivideByZeroException {
         Stack<BigDecimal> numStack = new Stack<BigDecimal>();
         for (MathSymbol symbol : eqrpn) {
             if (!symbol.isOperator()) {
@@ -45,6 +48,8 @@ public class Solver {
                     case DIVIDE:
                         try {
                             divide(numStack);
+                        } catch (DivideByZeroException e) {
+                            throw e;
                         } catch (IllegalEquationException e) {
                             throw e;
                         }
@@ -52,6 +57,8 @@ public class Solver {
                     case MODULUS:
                         try {
                             modulus(numStack);
+                        } catch (DivideByZeroException e) {
+                            throw e;
                         } catch (IllegalEquationException e) {
                             throw e;
                         }
@@ -101,19 +108,25 @@ public class Solver {
         }
     }
 
-    private static void divide(Stack<BigDecimal> numStack) throws IllegalEquationException {
+    private static void divide(Stack<BigDecimal> numStack) throws IllegalEquationException, DivideByZeroException {
         try {
             BigDecimal x = numStack.pop();
+            if (x.compareTo(new BigDecimal(0)) == 0) {
+                throw new DivideByZeroException();
+            }
             BigDecimal y = numStack.pop();
-            numStack.push(y.divide(x));
+            numStack.push(y.divide(x, 10, RoundingMode.HALF_UP));
         } catch (Exception e) {
             throw new IllegalEquationException();
         }
     }
 
-    private static void modulus(Stack<BigDecimal> numStack) throws IllegalEquationException {
+    private static void modulus(Stack<BigDecimal> numStack) throws IllegalEquationException, DivideByZeroException {
         try {
             BigDecimal x = numStack.pop();
+            if (x.compareTo(new BigDecimal(0)) == 0) {
+                throw new DivideByZeroException();
+            }
             BigDecimal y = numStack.pop();
             numStack.push(y.remainder(x));
         } catch (Exception e) {

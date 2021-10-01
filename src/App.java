@@ -1,6 +1,9 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import exceptions.DivideByZeroException;
+import exceptions.IllegalEquationException;
+import exceptions.IllegalOperatorException;
 import parser.Interpreter;
 import solver.Solver;
 import symbols.MathSymbol;
@@ -15,8 +18,16 @@ public class App {
                 System.out.println("Quitting");
                 break;
             }
-            ArrayList<MathSymbol> eqrpn = Interpreter.parseEquation(input);
-            System.out.println(Solver.solve(eqrpn).toString());
+            try {
+                ArrayList<MathSymbol> eqrpn = Interpreter.parseEquation(input);
+                System.out.println(Solver.solve(eqrpn).toString());
+            } catch (IllegalEquationException e) {
+                System.out.println("Error: Illegal Equation");
+            } catch (IllegalOperatorException e) {
+                System.out.println("Error: Illegal Operator");
+            } catch (DivideByZeroException e) {
+                System.out.println("Error: Divide by 0");
+            }
             System.out.println();
         }
         sc.close();
