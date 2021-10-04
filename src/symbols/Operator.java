@@ -8,7 +8,8 @@ public enum Operator {
     DIVIDE(1),
     MODULUS(1),
     EXPONENT(2),
-    PARENTHESES(100);
+    OPEN_PAREN(100),
+    CLOSE_PAREN(100);
 
     private int precedence;
 

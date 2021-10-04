@@ -1,3 +1,4 @@
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -11,6 +12,7 @@ import symbols.MathSymbol;
 public class App {
 
     public static void main(String[] args) throws Exception {
+        System.out.println();
         Scanner sc = new Scanner(System.in);
         while (true) {
             String input = sc.nextLine();
@@ -20,7 +22,12 @@ public class App {
             }
             try {
                 ArrayList<MathSymbol> eqrpn = Interpreter.parseEquation(input);
-                System.out.println(Solver.solve(eqrpn).toString());
+                for (MathSymbol symbol : eqrpn) {
+                    System.out.print(symbol.toString() + ", ");
+                }
+                System.out.println();
+                DecimalFormat outputFormat = new DecimalFormat("#0.##########");
+                System.out.println(outputFormat.format(Solver.solve(eqrpn).doubleValue()));
             } catch (IllegalEquationException e) {
                 System.out.println("Error: Illegal Equation");
             } catch (IllegalOperatorException e) {

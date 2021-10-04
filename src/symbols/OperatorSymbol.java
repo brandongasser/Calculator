@@ -21,8 +21,10 @@ public class OperatorSymbol implements MathSymbol {
             this.operator = Operator.MODULUS;
         } else if (operator.equals("^")) {
             this.operator = Operator.EXPONENT;
-        } else if (operator.equals("(") || operator.equals(")")) {
-            this.operator = Operator.PARENTHESES;
+        } else if (operator.equals("(")) {
+            this.operator = Operator.OPEN_PAREN;
+        } else if (operator.equals(")")) {
+            this.operator = Operator.CLOSE_PAREN;
         } else {
             throw new IllegalOperatorException();
         }
@@ -31,7 +33,7 @@ public class OperatorSymbol implements MathSymbol {
     public OperatorSymbol(Operator operator) {
         this.operator = operator;
     }
-    
+
     @Override
     public boolean isOperator() {
         return true;
@@ -56,14 +58,17 @@ public class OperatorSymbol implements MathSymbol {
             return "%";
         } else if (operator.equals(Operator.EXPONENT)) {
             return "^";
-        } else if (operator.equals(Operator.PARENTHESES)) {
-            return "( or )";
+        } else if (operator.equals(Operator.OPEN_PAREN)) {
+            return "(";
+        } else if (operator.equals(Operator.CLOSE_PAREN)) {
+            return ")";
         }
         return "";
     }
 
     /**
-     * do not use this method. it has to be here to allow for operators and operands to be in the same list
+     * do not use this method. it has to be here to allow for operators and operands
+     * to be in the same list
      */
     @Override
     public BigDecimal getValue() {

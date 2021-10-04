@@ -23,11 +23,10 @@ public class Interpreter {
         Stack<OperatorSymbol> operatorStack = new Stack<OperatorSymbol>();
         String currentNum = "";
         for (int i = 0; i < source.length(); i++) {
-            if ((i == 0 && source.charAt(i) == '-') || isNumChar(source.charAt(i))) {
+            if ((currentNum.length() == 0 && source.charAt(i) == '-') || isNumChar(source.charAt(i))) {
                 currentNum += source.charAt(i);
             } else {
-                // if there isn't a number before the operator, throw an illegal equation exception
-                if (currentNum.length() == 0) {
+                if (currentNum.length() == 0 || !containsDigit(currentNum)) {
                     throw new IllegalEquationException();
                 }
                 eqrpn.add(new OperandSymbol(currentNum));
@@ -60,6 +59,16 @@ public class Interpreter {
     private static boolean isNumChar(char a) {
         String numChars = "1234567890.";
         return numChars.contains(Character.toString(a));
+    }
+
+    private static boolean containsDigit(String a) {
+        String[] numChars = { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" };
+        for (String numChar : numChars) {
+            if (a.contains(numChar)) {
+                return true;
+            }
+        }
+        return false;
     }
 
 }
