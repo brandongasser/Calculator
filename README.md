@@ -8,7 +8,11 @@ The user can quit the program at any time by typing "quit" into the command line
 ## Features
 
 - Decimals
+- Negatives
 - Basic Arithmetic
-- Parentheses
+    - Addition
+    - Subtraction
+    - Multiplication
+    - Division
+    - Modulus
 - Exponents
-- Factorials
