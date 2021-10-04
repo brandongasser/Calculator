@@ -15,4 +15,5 @@ The user can quit the program at any time by typing "quit" into the command line
     - Multiplication
     - Division
     - Modulus
+- Parentheses
 - Exponents
